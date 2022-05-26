@@ -74,7 +74,7 @@ class HomeUi:
         self.symptoms_entry_info_label.place(x=70, y=60)
         self.symptoms_frame = LabelFrame(self.left_up, width="450", height="280", bd=3, bg="white")
         self.symptoms_frame.place(x=70, y=90)
-        self.left_top_add_button = Button(self.left_up, text=key[5], width=12)
+        self.left_top_add_button = Button(self.left_up, text=key[5], width=12, command=self.get_symptoms)
         self.left_top_add_button.place(x=530, y=95)
         self.left_top_remove_button = Button(self.left_up, text=key[6], width=12)
         self.left_top_remove_button.place(x=530, y=130)
@@ -127,6 +127,26 @@ class HomeUi:
         main_window = Tk()
         main_window.geometry("1500x800+40+20")
         HomeUi(main_window)
+
+    def get_symptoms(self):
+        temp_window = Tk()
+        temp_window.title("Symptoms Selection Window")
+        temp_window.geometry("500x200+700+300")
+
+        symptom_var = StringVar()
+
+        def set_symptom():
+            print("  ", symptom_var.get())
+                # temp_window.destroy()
+
+        symptoms_label = Label(temp_window, text="Select Symptom", font=("Bold", 14))
+        symptoms_label.place(x=40, y=20)
+        symptoms_combo = ttk.Combobox(temp_window, textvariable=symptom_var, font=("Italic", 13))
+        symptoms_combo['values'] = symptoms_english
+        symptoms_combo.place(x=40, y=80)
+        confirm_button = Button(temp_window, text="Confirm", command=set_symptom)
+        confirm_button.place(x=320, y=78)
+        temp_window.mainloop()
 
     def radio_change(self):
         option = globals()['symp_var'].get()
