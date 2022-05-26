@@ -1,6 +1,6 @@
 import pandas as pd
 
-df = pd.read_csv("../program_database/Disease_symptom_dataset.csv")
+df = pd.read_csv("../Database/Disease_symptom_dataset.csv")
 symptoms = df.columns[:-1]
 new_df = df.loc[df['itching'] == 1]
 new_df1 = df.loc[df['skin_rash'] == 1]
@@ -12,6 +12,7 @@ a.extend(list(set(new_df1.loc[:, 'prognosis'])))
 a.extend(list(set(new_df2.loc[:, 'prognosis'])))
 a.extend(list(set(new_df3.loc[:, 'prognosis'])))
 finalize = dict()
+
 for i in a:
     finalize[i] = a.count(i)
 
@@ -24,3 +25,8 @@ for key, value in zip(finalize.keys(), finalize.values()):
         max_val = key
 
 print(max_val)
+
+count = 1
+for i in set(df.loc[:, 'prognosis']):
+    print(count, i)
+    count += 1
